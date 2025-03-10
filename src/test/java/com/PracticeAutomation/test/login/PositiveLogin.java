@@ -1,14 +1,17 @@
 package com.PracticeAutomation.test.login;
-
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 public class PositiveLogin {
 
-    public void testLogin(){
+    @Test
+    public void testLogin() throws InterruptedException{
         //Open page
         WebDriver driver = new ChromeDriver(); // creating instance of the class Chromedriver class.
         driver.get("https://practicetestautomation.com/practice-test-login/");
@@ -25,6 +28,8 @@ public class PositiveLogin {
         WebElement submitbtn = driver.findElement(By.id("submit"));
         submitbtn.click();
 
+        Thread.sleep(2000);
+
         //Verify new page URL contains practicetestautomation.com/logged-in-successfully/
         String ExpectedUrl = "https://practicetestautomation.com/logged-in-successfully/";
         String Actualurl = driver.getCurrentUrl();
@@ -35,7 +40,7 @@ public class PositiveLogin {
         String Message = "Congratulations student. You successfully logged in!";
         Assert.assertTrue(pageSource.contains(Message)); // we are uisng the assert boolean condition to see if the page source contains the message
 
-        //Verify button Log out is displayed on the new page
+        //Verify mvnbutton Log out is displayed on the new page
         WebElement logoutbtn = driver.findElement(By.linkText("Log out"));
         Assert.assertTrue(logoutbtn.isDisplayed()); // Using the Assert boolean condition to see if logout button is displayed or not.
         driver.quit();
