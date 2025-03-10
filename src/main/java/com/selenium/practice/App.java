@@ -14,31 +14,35 @@ public class App
     {
         WebDriver driver = new ChromeDriver();
         loginpageElemet(driver);
-        Exceptionpageelement(driver);
+        //Exceptionpageelement(driver);
         driver.quit();
 
     }
 
-    private static String  loginpageElemet(WebDriver driver){
+    private static void  loginpageElemet(WebDriver driver){
         driver.get("https://practicetestautomation.com/practice-test-login/");
         WebElement UsernameField = driver.findElement(By.id("username"));
-        WebElement username = driver.findElement(By.xpath("//input[@id='username']")); // using the xpath
-        WebElement name = driver.findElement(By.cssSelector("input[id='username']")); // using CSS Selector.
+        UsernameField.sendKeys("Prasad");
+        //WebElement username = driver.findElement(By.xpath("//input[@id='username']")); // using the xpath
+        //WebElement name = driver.findElement(By.cssSelector("input[id='username']")); // using CSS Selector.
         WebElement PasswordField = driver.findElement(By.id("password"));
-        WebElement passwordcss = driver.findElement(By.cssSelector("input[id='password']"));
+        PasswordField.sendKeys("Test");
+        //WebElement passwordcss = driver.findElement(By.cssSelector("input[id='password']"));
         WebElement SubmitBtn = driver.findElement(By.className("btn"));
-        WebElement button = driver.findElement(By.xpath("//button[@class='btn']"));
+        SubmitBtn.isDisplayed();
+        SubmitBtn.click();
+        //WebElement button = driver.findElement(By.xpath("//button[@class='btn']"));
 
-        List<WebElement> inputFields = driver.findElements(By.tagName("input")); // it wll list all the input type webelements
-
-
-        WebElement LinkTextLocator = driver.findElement(By.linkText("Practice Test Automation."));
-        WebElement PartialLinkText = driver.findElement(By.partialLinkText("Practice Test"));
-
-        WebElement passwordbelowusername = driver.findElement(RelativeLocator.with(By.tagName("input")).below(By.id("username")));
-        WebElement PrivacyPolicyLink = driver.findElement(RelativeLocator.with(By.tagName("a")).straightRightOf(By.linkText("Practice Test Automation.")));
-        //WebElement Homebutton = driver.findElement(By.xpath("menu-item-43"));
-        return(null);
+//        List<WebElement> inputFields = driver.findElements(By.tagName("input")); // it wll list all the input type webelements
+//
+//
+//        WebElement LinkTextLocator = driver.findElement(By.linkText("Practice Test Automation."));
+//        WebElement PartialLinkText = driver.findElement(By.partialLinkText("Practice Test"));
+//
+//        WebElement passwordbelowusername = driver.findElement(RelativeLocator.with(By.tagName("input")).below(By.id("username")));
+//        WebElement PrivacyPolicyLink = driver.findElement(RelativeLocator.with(By.tagName("a")).straightRightOf(By.linkText("Practice Test Automation.")));
+//        //WebElement Homebutton = driver.findElement(By.xpath("menu-item-43"));
+//        return(null);
 
     }
 
@@ -63,7 +67,7 @@ public class App
         WebElement AddbuttonCSS = driver.findElement(By.cssSelector("button[id='add_btn']"));
     }
     private static String ChromeTest(String url){
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(); // Creating variale of Webdriver interface and instance of Chromedriver class
         driver.get(url);
         String title = driver.getTitle();
         //driver.quit();
