@@ -1,4 +1,6 @@
 package com.PracticeAutomation.test.login;
+import io.qameta.allure.Owner;
+import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 public class NegativeLogin {
+
+    @Description("What is this ?")
+    @Owner("Prasad")
     @Test
     public void IncorrectUsername() throws InterruptedException{
         WebDriver driver = new ChromeDriver();
@@ -40,6 +45,8 @@ public class NegativeLogin {
         driver.quit();
 
     }
+    @Description("What is this ?")
+    @Owner("Prasad")
     @Test
     public void IncorrectPassword() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
@@ -63,7 +70,6 @@ public class NegativeLogin {
 
 //        String pageSource = driver.getPageSource();
 //        Assert.assertTrue(pageSource.contains(ErrorMessage));
-
         Assert.assertEquals(ActualErrorMessage, ExpectedErrorMessage);
         driver.quit();
     }

@@ -15,9 +15,7 @@ public class PositiveLogin {
     @Test
     public void testLogin() throws InterruptedException{
         //Open page
-        //WebDriver driver = new ChromeDriver(); // creating instance of the class Chromedriver class.
-        //WebDriver driver = new FirefoxDriver();
-        WebDriver driver = new EdgeDriver();
+        WebDriver driver = new ChromeDriver(); // creating instance of the class Chromedriver class.
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
         //Type username student into Username field

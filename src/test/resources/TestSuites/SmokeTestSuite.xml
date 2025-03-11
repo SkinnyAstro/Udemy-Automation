@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke Test" verbose="1">
+  <test name="Positive Login">
+    <classes>
+       <class name="com.PracticeAutomation.test.login.PositiveLogin"/>
+    </classes>
+  </test>
+</suite>
