@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
@@ -15,7 +16,8 @@ public class PositiveLogin {
     public void testLogin() throws InterruptedException{
         //Open page
         //WebDriver driver = new ChromeDriver(); // creating instance of the class Chromedriver class.
-        WebDriver driver = new FirefoxDriver();
+        //WebDriver driver = new FirefoxDriver();
+        WebDriver driver = new EdgeDriver();
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
         //Type username student into Username field
