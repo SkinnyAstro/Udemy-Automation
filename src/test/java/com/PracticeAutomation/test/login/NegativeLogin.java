@@ -14,7 +14,7 @@ public class NegativeLogin {
         driver.get("https://practicetestautomation.com/practice-test-login/");
 //Type username incorrectUser into Username field
         WebElement usernameinput = driver.findElement(By.id("username"));
-        usernameinput.sendKeys("incorrectuser");
+        usernameinput.sendKeys("student");
 //Type password Password123 into Password field
         WebElement passwordinput = driver.findElement(By.id("password"));
         passwordinput.sendKeys("Password123");
@@ -40,7 +40,6 @@ public class NegativeLogin {
         driver.quit();
 
     }
-
     @Test
     public void IncorrectPassword() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
