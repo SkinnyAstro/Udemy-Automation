@@ -2,12 +2,12 @@
 <suite name="Full Regression suite" verbose="1">
     <test name="Positive Login">
         <classes>
-            <class name="com.PracticeAutomation.test.login.PositiveLogin"/>
+            <class name="com.practice.Automation.login.NegativeLogintest"/>
         </classes>
     </test>
     <test name="Negative Login">
         <classes>
-            <class name="com.PracticeAutomation.test.login.NegativeLogin"/>
+            <class name="com.practice.Automation.login.Positivelogintest"/>
         </classes>
     </test>
 </suite>

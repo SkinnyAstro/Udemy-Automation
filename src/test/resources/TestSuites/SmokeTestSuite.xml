@@ -3,7 +3,7 @@
 <suite name="Smoke Test" verbose="1">
   <test name="Positive Login">
     <classes>
-       <class name="com.PracticeAutomation.test.login.PositiveLogin"/>
+       <class name="com.practice.Automation.login.Positivelogintest"/>
     </classes>
   </test>
 </suite>
