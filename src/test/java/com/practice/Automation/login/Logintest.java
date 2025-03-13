@@ -3,19 +3,45 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class Logintest {
-   @Test
-    public void testLogin() throws InterruptedException{
-        //Open page
-        WebDriver driver = new ChromeDriver(); // creating instance of the class Chromedriver class.
-        driver.get("https://practicetestautomation.com/practice-test-login/");
 
-        //Type username student into Username field
-        WebElement usernameinput = driver.findElement(By.id("username"));
-        usernameinput.sendKeys("student");
+    private WebDriver driver;
+
+
+    @BeforeMethod(alwaysRun = true)
+    @Parameters("browser")
+    public void SetUp(@Optional ("chrome") String browser){
+        System.out.println("Your running on "+browser);
+        switch (browser.toLowerCase()){
+            case "chrome":
+                driver= new ChromeDriver();
+                break;
+
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+
+            case "default":
+                driver= new ChromeDriver();
+                break;
+        }
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void Close(){
+        driver.quit();
+    }
+   @Test(groups = {"Positive","Regression","Smoke"})
+    public void testLogin() throws InterruptedException{
+
+
+       WebElement usernameinput = driver.findElement(By.id("username"));
+       usernameinput.sendKeys("student");
 
         //Type password Password123 into Password field
         WebElement passwordinput = driver.findElement(By.id("password"));
@@ -39,17 +65,16 @@ public class Logintest {
         Assert.assertTrue(logoutbtn.isDisplayed());
         driver.quit();
     }
-    @Test
-    public void IncorrectUsername() throws InterruptedException{
-        WebDriver driver = new ChromeDriver();
+    @Parameters({"username","password","ExpectedErrorMessage"})
+    @Test(groups = {"Negative","Regression"})
+    public void NegativeLoginTest(String username ,String password , String ExpectedErrorMessage) throws InterruptedException{
 
-        driver.get("https://practicetestautomation.com/practice-test-login/");
 
         WebElement usernameinput = driver.findElement(By.id("username"));
-        usernameinput.sendKeys("incorrect");
+        usernameinput.sendKeys(username);
 
         WebElement passwordinput = driver.findElement(By.id("password"));
-        passwordinput.sendKeys("Password123");
+        passwordinput.sendKeys(password);
 
 
         WebElement submitbtn = driver.findElement(By.id("submit"));
@@ -59,36 +84,13 @@ public class Logintest {
 
         WebElement Error = driver.findElement(By.id("error"));
         Assert.assertTrue(Error.isDisplayed());
-        String ExpectedErrorMessage ="Your username is invalid!";
+        //String ExpectedErrorMessage ="Your username is invalid!";
         String ActualErrormessage = Error.getText();
         Assert.assertEquals(ActualErrormessage ,ExpectedErrorMessage);
         driver.quit();
-        driver.quit();
+
 
     }
-    @Test
-    public void IncorrectPassword() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://practicetestautomation.com/practice-test-login/");
 
-        WebElement usernameinput = driver.findElement(By.id("username"));
-        usernameinput.sendKeys("student");
-
-        WebElement passwordinput = driver.findElement(By.id("password"));
-        passwordinput.sendKeys("incorrectpassword");
-
-        WebElement submitbtn = driver.findElement(By.id("submit"));
-        submitbtn.click();
-        Thread.sleep(2000);
-
-        WebElement Error = driver.findElement(By.id("error"));
-        Assert.assertTrue(Error.isDisplayed());
-
-        String ExpectedErrorMessage = "Your password is invalid!";
-        String ActualErrorMessage = Error.getText();
-
-        Assert.assertEquals(ActualErrorMessage, ExpectedErrorMessage);
-        driver.quit();
-    }
 
 }

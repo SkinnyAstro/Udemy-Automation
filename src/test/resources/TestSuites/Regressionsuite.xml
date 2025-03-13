@@ -1,13 +1,44 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Full Regression suite" verbose="1">
     <test name="Positive Login">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="com.practice.Automation.login.NegativeLogintest"/>
+            <class name="com.practice.Automation.login.Logintest">
+                <methods>
+                    <include name="testLogin"></include>
+                </methods>
+            </class>
         </classes>
     </test>
-    <test name="Negative Login">
+
+    <test name="Incorrect username Test">
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="username" value="Incorrectusername"></parameter>
+        <parameter name="password" value="Password123"></parameter>
+        <parameter name="ExpectedErrorMessage" value="Your username is invalid!"></parameter>
+
         <classes>
-            <class name="com.practice.Automation.login.Logintest"/>
+            <class name="com.practice.Automation.login.Logintest">
+                <methods>
+                    <include name="NegativeLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Incorrect password Test">
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="username" value="student"></parameter>
+        <parameter name="password" value="IncorrectPassword"></parameter>
+        <parameter name="ExpectedErrorMessage" value="Your password is invalid!"></parameter>
+
+
+        <classes>
+            <class name="com.practice.Automation.login.Logintest">
+                <methods>
+                    <include name="NegativeLoginTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
