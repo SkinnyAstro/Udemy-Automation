@@ -10,20 +10,33 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class DrPortalLogin {
+
+private WebDriver driver;
+@BeforeMethod(alwaysRun = true)
+public void Setup(){
+       driver = new ChromeDriver();
+       driver.get("http://dev-doctor.s3-website.ap-south-1.amazonaws.com/amazon/");
+   }
+
+   @AfterMethod(alwaysRun = true)
+   public void BrowserClose(){
+    driver.quit();
+   }
+
+
+
     @Test
     public void positiveLogin() throws InterruptedException {
-
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://dev-doctor.s3-website.ap-south-1.amazonaws.com/amazon/");
-
-        WebElement usernameinput = driver.findElement(By.name("username"));
-        usernameinput.sendKeys("prasad.sartape@truemeds.in");
+    WebElement usernameinput = driver.findElement(By.name("username"));
+    usernameinput.sendKeys("prasad.sartape@truemeds.in");
 
         WebElement passwordinput = driver.findElement(By.name("password"));
         passwordinput.sendKeys("Truemeds@2023");
@@ -43,9 +56,6 @@ public class DrPortalLogin {
     @Parameters({"username","password","ExpectedErrorMessage"})
     @Test
     public void NegativeLogin(String username , String password , String ExpectedErrorMessage) throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://dev-doctor.s3-website.ap-south-1.amazonaws.com/amazon/");
-
         WebElement usernameinput = driver.findElement(By.name("username"));
         usernameinput.sendKeys(username);
 
@@ -56,13 +66,16 @@ public class DrPortalLogin {
 
         WebElement loginbtn = driver.findElement(By.id("login"));
         loginbtn.click();
-      //  Thread.sleep(1000);
+       Thread.sleep(2000);
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        WebElement error = driver.findElement(By.xpath("//span[contains(text(), 'Exception occurred while Authenticating doctor')]"));
+       WebElement error = driver.findElement(By.xpath("//div[@class='ant-message-notice']"));
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated((By) error));
+//WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        //WebElement error = driver.findElement(By.xpath("//span[contains(text(), 'Exception occurred while Authenticating doctor')]"));
+
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated((By) error));
         String ActualErrorMessage = error.getText();
+        System.out.println(ActualErrorMessage);
 
         Assert.assertEquals(ActualErrorMessage,ExpectedErrorMessage);
         driver.quit();
