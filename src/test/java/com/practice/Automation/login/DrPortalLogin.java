@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -51,13 +52,16 @@ public class DrPortalLogin {
         WebElement passwordinput = driver.findElement(By.name("password"));
         passwordinput.sendKeys(password);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
         WebElement loginbtn = driver.findElement(By.id("login"));
         loginbtn.click();
       //  Thread.sleep(1000);
 
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         WebElement error = driver.findElement(By.xpath("//span[contains(text(), 'Exception occurred while Authenticating doctor')]"));
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated((By) error));
         String ActualErrorMessage = error.getText();
 
         Assert.assertEquals(ActualErrorMessage,ExpectedErrorMessage);

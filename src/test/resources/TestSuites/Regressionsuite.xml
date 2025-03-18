@@ -12,11 +12,10 @@
     </test>
 
     <test name="Incorrect username Test">
-        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="browser" value="safari"></parameter>
         <parameter name="username" value="Incorrectusername"></parameter>
         <parameter name="password" value="Password123"></parameter>
         <parameter name="ExpectedErrorMessage" value="Your username is invalid!"></parameter>
-
         <classes>
             <class name="com.practice.Automation.login.Logintest">
                 <methods>
@@ -31,8 +30,6 @@
         <parameter name="username" value="student"></parameter>
         <parameter name="password" value="IncorrectPassword"></parameter>
         <parameter name="ExpectedErrorMessage" value="Your password is invalid!"></parameter>
-
-
         <classes>
             <class name="com.practice.Automation.login.Logintest">
                 <methods>

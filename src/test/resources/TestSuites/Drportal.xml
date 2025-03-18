@@ -4,7 +4,7 @@
         <classes>
             <class name="com.practice.Automation.login.DrPortalLogin">
                 <methods>
-                    <include name="positiveLogin"></include>
+                    <exclude name="positiveLogin"></exclude>
                 </methods>
             </class>
         </classes>
